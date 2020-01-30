@@ -25,5 +25,12 @@
 	
 </c:forEach>
 
+<div>
+	<a href="insertui.do">±Û¾²±â</a>
+
+</div>
+
+
+
 </body>
 </html>

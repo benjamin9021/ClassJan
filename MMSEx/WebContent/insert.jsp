@@ -13,15 +13,42 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+	
 	<h1>회원 가입</h1>
+	
 	<form action="insert.do" method="post">
-	<label for = "id" id = "id">ID:</label>
-	<input name = "id" id="id"><br>
-	<label for = "name" id = "name">NAME:</label>
-	<input name = "name" id="name"><br>
-	<label for = "age" id = "age">AGE:</label>
-	<input name = "age" id="age" type="number"><br>
-	<input type="submit" value="회원 등록">
+	ID: <input required name = "id" ><button>중복체크</button><br>
+	<p ></p>
+	
+	NAME <input required name = "name"><br>
+	AGE:<input name = "age" type="number"><br>
+	<input type="submit" value="등록">
+	
+	
 	</form>
+	
+	
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		$("button").click(function() {
+			var id = $("input[name='id']").val();
+			$.ajax({
+				type : 'get',
+				url : 'checkid.do',
+				data : {
+					id : id
+				},
+				dataType : 'text',
+				success : function(result) {
+					$("p").text(result);
+				}
+			});
+			
+		} );
+	});
+</script>
+	
+	
 </body>
 </html>

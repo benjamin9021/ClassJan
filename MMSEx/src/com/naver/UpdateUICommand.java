@@ -10,7 +10,10 @@ public class UpdateUICommand implements Command {
 		// TODO Auto-generated method stub
 		
 		String id = request.getParameter("id");
-		MemberDTO dto = new MemberDAO().updateui(id);
+		
+		MemberDAO dao = new MemberDAO();
+		
+		MemberDTO dto = dao.updateui(id);
 		
 		request.setAttribute("dto", dto);
 		

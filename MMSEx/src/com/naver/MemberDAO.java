@@ -112,11 +112,11 @@ public class MemberDAO {
 		}
 		return dto;
 	}	
+	
 	public void update(MemberDTO dto) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "update member2 set name=?, age=? where id=?";
-
 		try {
 			conn = dataFactory.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -131,29 +131,10 @@ public class MemberDAO {
 			closeAll(null, pstmt, conn);
 		}
 	}
+	
 	public MemberDTO updateui(String id) {
-		MemberDTO dto = null;
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		String sql = "select * from member2 where id = ?";
-		ResultSet rs = null;
-
-		try {
-			conn = dataFactory.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				String name = rs.getString("name");
-				int age = rs.getInt("age");
-				dto = new MemberDTO(id, name, age);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			closeAll(rs, pstmt, conn);
-		}
-		return dto;
+		
+		return read(id); // read메서드랑 같음 단, 게시판에서는 해둘것 조회수 증가를 위해서
 	}
 	
 	public void insert(MemberDTO dto) {
@@ -173,7 +154,6 @@ public class MemberDAO {
 			closeAll(null, pstmt, conn);
 		}
 	}
-	
 	
 	public void delete(String id) {
 		Connection conn = null;

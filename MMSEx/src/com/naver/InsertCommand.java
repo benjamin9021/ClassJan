@@ -15,7 +15,11 @@ public class InsertCommand implements Command {
 		if (sAge != null) {
 			age = Integer.valueOf(sAge);
 		}
-		new MemberDAO().insert(new MemberDTO(id,name,age));
+		
+		MemberDAO dao = new MemberDAO();
+		
+		dao.insert(new MemberDTO(id,name,age));
+		
 //		response.sendRedirect("read.do?id="+id);
 //		response.sendRedirect("list.do");
 		

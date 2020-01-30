@@ -15,10 +15,11 @@ public class UpdateCommand implements Command {
 		if (sAge != null) {
 			age = Integer.valueOf(sAge);
 		}
-		new MemberDAO().update(new MemberDTO(id, name, age));
+		MemberDAO dao = new MemberDAO();
+		dao.update(new MemberDTO(id, name, age));
 				
 		
-		return new CommandAction(true, "list.do");
+		return new CommandAction(true, "read.do?id="+id);
 	}
 
 }

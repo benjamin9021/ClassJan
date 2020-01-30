@@ -13,60 +13,69 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public FrontController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public FrontController() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String uri = request.getRequestURI();
 		String cPath = request.getContextPath();
 		String what = uri.substring(cPath.length());
-		
+
 		Command com = null;
 		if (what.equalsIgnoreCase("/list.do")) {
 			com = new ListCommand();
-		}else if (what.equalsIgnoreCase("/login.do")) {
+		} else if (what.equalsIgnoreCase("/login.do")) {
 			com = new LoginCommand();
-		}else if (what.equalsIgnoreCase("/loginui.do")) {
+		} else if (what.equalsIgnoreCase("/loginui.do")) {
 			com = new LoginUICommand();
-		}else if (what.equalsIgnoreCase("/logout.do")) {
+		} else if (what.equalsIgnoreCase("/logout.do")) {
 			com = new LogoutCommand();
-		}else if (what.equalsIgnoreCase("/read.do")) {
+		} else if (what.equalsIgnoreCase("/read.do")) {
 			com = new ReadCommand();
-		}else if (what.equalsIgnoreCase("/update.do")) {
+		} else if (what.equalsIgnoreCase("/update.do")) {
 			com = new UpdateCommand();
-		}else if (what.equalsIgnoreCase("/updateui.do")) {
+		} else if (what.equalsIgnoreCase("/updateui.do")) {
 			com = new UpdateUICommand();
-		}	else if (what.equalsIgnoreCase("/insert.do")) {
+		} else if (what.equalsIgnoreCase("/insert.do")) {
 			com = new InsertCommand();
-		}else if (what.equalsIgnoreCase("/insertui.do")) {
+		} else if (what.equalsIgnoreCase("/insertui.do")) {
 			com = new InsertUICommand();
-		}else if (what.equalsIgnoreCase("/delete.do")) {
+		} else if (what.equalsIgnoreCase("/checkid.do")) {
+			com = new CheckIDCommand();
+		} else if (what.equalsIgnoreCase("/delete.do")) {
 			com = new DeleteCommand();
 		}
-		
+
 		if (com != null) {
 			CommandAction action = com.execute(request, response);
-			if (action.isRedirect()) {
-				response.sendRedirect(action.getWhere());
-			}else {
-				request.getRequestDispatcher(action.getWhere()).forward(request, response);
+
+			if (action != null) {
+				if (action.isRedirect()) {
+					response.sendRedirect(action.getWhere());
+				} else {
+					request.getRequestDispatcher(action.getWhere()).forward(request, response);
+				}
 			}
 		}
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

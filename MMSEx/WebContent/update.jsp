@@ -16,11 +16,10 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-
+	<h1>* 회원 정보 수정 *</h1>
 	<form action="update.do" method="post">
-
 	ID: <input readonly name="id" value="${dto.id}"><br>
-	Name: <input value="${dto.name}" name="name"><br>
+	Name: <input required value="${dto.name}" name="name"><br>
 	Age: <input	name="age" type="number" value="${dto.age}"><br>
 	<input type="submit" value="수정">
 
