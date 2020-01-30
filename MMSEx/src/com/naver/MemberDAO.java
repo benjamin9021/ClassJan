@@ -159,6 +159,7 @@ public class MemberDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "delete from member2 where id = ?";
+		
 		try {
 			conn = dataFactory.getConnection();
 			pstmt = conn.prepareStatement(sql);

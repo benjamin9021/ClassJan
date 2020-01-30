@@ -9,9 +9,10 @@ public class DeleteCommand implements Command {
 	@Override
 	public CommandAction execute(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
-		new MemberDAO().delete(id);
+		MemberDAO dao = new MemberDAO();
+		dao.delete(id);
 
-		return new CommandAction(false, "loginui.do");
+		return new CommandAction(true, "list.do");
 	}
 
 }
